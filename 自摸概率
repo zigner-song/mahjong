@@ -1,0 +1,24 @@
+library(dplyr)
+
+
+mix <- function(a,b){
+  y<-factorial(a+b)/(factorial(a)*factorial(b))
+  return(y)
+}
+mix(1,2)
+
+myfun<-
+function(x,n){
+  y = mix(n,4*x+13-n)
+  x = mix(n,3*x+13-n)
+  p=1-x/y
+  return(p)
+}
+
+
+mapply(myfun,1:12,5)
+
+mapply(function(x){mapply(myfun,18:1,x)},
+       1:8) %>% 
+  `colnames<-`(paste('山存',1:8,'枚',sep='')) %>% 
+  `rownames<-`(paste('第',1:18,'巡',sep=''))
